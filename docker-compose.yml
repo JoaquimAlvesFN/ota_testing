@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  ota:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ota
+    env_file: .env
+    environment:
+      - DB_USERNAME=$PG_USER
+      - DB_PASSWORD=$PG_PASSWORD
+      - DB_HOSTNAME=ota_db
+      - DB_PORT=$PG_PORT
+      - DB_NAME=$PG_DB_NAME
+    ports:
+      - "3000"
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - app-network
+
+  ota_db:
+    image: postgres
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$PG_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$PG_PASSWORD
+    volumes:     
+      - dbdata:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:  
