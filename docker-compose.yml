@@ -6,15 +6,14 @@ services:
       context: .
       dockerfile: Dockerfile
     image: ota
-    env_file: .env
     environment:
-      - DB_USERNAME=$PG_USER
-      - DB_PASSWORD=$PG_PASSWORD
-      - DB_HOSTNAME=ota_db
-      - DB_PORT=$PG_PORT
-      - DB_NAME=$PG_DB_NAME
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - DB_HOSTNAME=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - PG_DB_NAME=${PG_DB_NAME}
     ports:
-      - "3333:33333"
+      - "3333:3333"
     volumes:
       - .:/usr/src/app
       - node_modules:/usr/src/app/node_modules
@@ -22,12 +21,11 @@ services:
       - app-network
 
   ota_db:
-    image: postgres
-    env_file: .env
+    image: postgres:14
     environment:
-      - POSTGRES_USERNAME=$PG_USER
-      - POSTGRES_PASSWORD=$PG_PASSWORD
-      - POSTGRES_DATABASE=$PG_DB_NAME
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DB_NAME}
     ports:
       - "5432:5432"
     volumes:     
