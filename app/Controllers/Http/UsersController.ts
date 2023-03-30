@@ -15,20 +15,21 @@ export default class UsersController {
   }
 
   public async show({response, params}: HttpContextContract) {
-    const id = params
-    
-    const user = await User.findBy('id', id)
+    const user = await User.findBy('id', params.id)
 
     return response.json(user)
   }
 
-  public async update({}: HttpContextContract) {}
+  public async update({request, response, params}: HttpContextContract) {
+    const user = await User.findOrFail(params.id)
+    const userUpdated = await user.merge(request.body()).save()
+
+    return response.json(userUpdated)
+  }
 
   public async destroy({response, params}: HttpContextContract) {
-    const id = params
+    await User.query().where('id', params.id).delete()
 
-    const userDeleted = await User.query().where(id).delete()
-
-    return response.json(userDeleted)
+    return response.status(204)
   }
 }
