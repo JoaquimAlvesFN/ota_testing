@@ -12,9 +12,7 @@ export default class User extends BaseModel {
   @column()
   public birth: Date
 
-  @hasMany(() => Travel, {
-    foreignKey: 'userId'
-  })
+  @hasMany(() => Travel)
   public travels: HasMany<typeof Travel>
 
   @column.dateTime({ autoCreate: true })
