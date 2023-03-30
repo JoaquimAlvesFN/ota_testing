@@ -7,6 +7,32 @@ Base Project for an online travel agency
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 
+## Environment Variables
+
+Adjust the environment variables by copying the .env.example file to .env and adjusting it so that the database can be created based on what is informed in the .env file
+
+`PORT`
+
+`HOST`
+
+`NODE_ENV`
+
+`APP_KEY`
+
+`DRIVE_DISK`
+
+`DB_CONNECTION`
+
+`PG_HOST`
+
+`PG_PORT`
+
+`PG_USER`
+
+`PG_PASSWORD`
+
+`PG_DB_NAME`
+
 ## Deployment
 
 To deploy this project run
