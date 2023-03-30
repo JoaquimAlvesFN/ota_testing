@@ -7,7 +7,7 @@ export default class Travel extends BaseModel {
   public id: number
 
   @column()
-  public user_id: number
+  public userId: number
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
